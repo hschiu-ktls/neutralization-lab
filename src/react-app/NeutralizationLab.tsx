@@ -218,14 +218,14 @@ const NeutralizationLab = () => {
     <div className="w-full max-w-4xl mx-auto p-4 bg-white rounded-xl shadow-xl border border-slate-200 font-sans relative">
       
       {/* --- Header --- */}
-      <header className="mb-4 flex items-center justify-between border-b border-slate-200 pb-4">
+      <header className="mb-4 flex items-center justify-between border-b border-slate-200 pb-4 flex-wrap">
         <div className="flex items-center gap-3">
           <div className="bg-blue-100 p-2 rounded-lg">
             <FlaskConical className="text-blue-600" size={24} />
           </div>
           <div>
-            <h1 className="font-bold text-slate-900">Neutralization Lab</h1>
-            <p className="text-slate-500 text-xs font-medium">Task: Determine exact volume of NaOH to neutralize 10mL of HCl</p>
+            <p className="text-xl text-left font-bold text-slate-900">Neutralization Lab</p>
+            <p className="text-slate-500 text-left text-xs font-medium">Task: Determine exact volume of NaOH to neutralize 10mL of HCl</p>
           </div>
         </div>
         <button 
