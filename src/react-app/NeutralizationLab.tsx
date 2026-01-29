@@ -248,7 +248,7 @@ const NeutralizationLab = () => {
             You are adding <strong>Dilute Sodium Hydroxide (NaOH)</strong>.<br/>
             How much Alkali do you think is needed to reach neutralization (pH 7)?
           </p>
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <input 
               type="number" 
               value={userPrediction}
