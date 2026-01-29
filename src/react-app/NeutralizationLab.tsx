@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/purity */
-import { useState, } from 'react';
+import { useState } from 'react';
 import { Beaker, FlaskConical, CheckCircle, ArrowRight, RefreshCw, Syringe, Activity, Sparkles, Microscope } from 'lucide-react';
 
 const NeutralizationLab = () => {
@@ -16,7 +15,7 @@ const NeutralizationLab = () => {
   const [currentpH, setCurrentpH] = useState(1.0); 
   const [phHistory, setPhHistory] = useState([{ vol: 0, ph: 1.0 }]); 
   const [neutralReached, setNeutralReached] = useState(false); 
-  const [isShaking, setIsShaking] = useState(false); // NEW STATE: Controls the shake
+  const [isShaking, setIsShaking] = useState(false); 
   
   // Quiz States
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -111,7 +110,7 @@ const NeutralizationLab = () => {
 
     // Trigger Shake Animation
     setIsShaking(true);
-    setTimeout(() => setIsShaking(false), 500); // Stop shaking after 0.5s
+    setTimeout(() => setIsShaking(false), 500); 
 
     const newVol = alkaliAdded + amount;
     const roundedVol = Math.round(newVol * 100) / 100; 
@@ -225,13 +224,13 @@ const NeutralizationLab = () => {
             <FlaskConical className="text-blue-600" size={24} />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-slate-900">Neutralization Lab</h1>
+            <h1 className="font-bold text-slate-900">Neutralization Lab</h1>
             <p className="text-slate-500 text-xs font-medium">Task: Determine exact volume of NaOH to neutralize 10mL of HCl</p>
           </div>
         </div>
         <button 
           onClick={handleReset} 
-          className="flex items-center gap-2 px-4 py-2 text-xs font-bold text-slate-700 bg-white border-2 border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm"
+          className="flex items-center gap-2 px-4 py-2 text-xs font-bold text-slate-700 !bg-white border-2 border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm"
         >
           <RefreshCw size={14} /> RESTART
         </button>
@@ -255,12 +254,19 @@ const NeutralizationLab = () => {
               value={userPrediction}
               onChange={(e) => setUserPrediction(e.target.value)}
               placeholder="Enter volume (mL)"
-              className="border-2 border-slate-300 rounded-lg px-4 py-3 text-sm w-48 text-center text-slate-900 font-bold focus:border-blue-500 outline-none shadow-inner"
+              className="border-2 border-slate-400 rounded-lg px-4 py-3 text-sm w-48 text-center text-slate-900 font-bold focus:border-blue-600 outline-none shadow-inner bg-white"
             />
+            {/* UPDATED BUTTON: Explicit styles for light mode visibility */}
             <button 
               onClick={submitPrediction}
               disabled={!userPrediction}
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-md transition-all active:scale-95"
+              className={`
+                px-8 py-3 rounded-lg font-bold text-lg shadow-md transition-all active:scale-95 border-2
+                ${!userPrediction 
+                  ? '!bg-slate-200 text-slate-400 border-slate-300 cursor-not-allowed' 
+                  : '!bg-blue-600 text-white border-blue-700 hover:bg-blue-700 hover:border-blue-800'
+                }
+              `}
             >
               Start Experiment
             </button>
@@ -387,7 +393,7 @@ const NeutralizationLab = () => {
               </div>
 
               <div className="mt-2 text-base font-mono text-slate-700 font-bold bg-white/80 px-3 py-1 rounded-full border border-slate-200 shadow-sm">
-                 pH: <span style={{ color: getLiquidColor(currentpH) }}>{currentpH.toFixed(1)}</span>
+                 pH: <span style={{ color: gameState != 'running' ? 'black' : getLiquidColor(currentpH) }}>{currentpH.toFixed(1)}</span>
               </div>
             </div>
 
@@ -440,8 +446,8 @@ const NeutralizationLab = () => {
                     className={`
                       w-full py-3 rounded-xl font-bold text-sm transition-all duration-200 border-2
                       ${(alkaliAdded >= 8 && alkaliAdded < 12) || alkaliAdded >= MAX_ALKALI
-                        ? 'bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed' 
-                        : 'bg-white text-blue-600 border-blue-500 hover:bg-blue-50 hover:border-blue-600 hover:text-blue-700 active:scale-95 shadow-sm'
+                        ? '!bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed' 
+                        : '!bg-white text-blue-600 border-blue-500 hover:bg-blue-50 hover:border-blue-600 hover:text-blue-700 active:scale-95 shadow-sm'
                       }
                     `}
                   >
